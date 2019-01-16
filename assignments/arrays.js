@@ -63,8 +63,18 @@ let inventory = [{"id":1,"car_make":"Lincoln","car_model":"Navigator","car_year"
 
 // ==== Challenge 1 ====
 // The dealer can't recall the information for a car with an id of 33 on his lot. Help the dealer find out which car has an id of 33 by logging the car's year, make, and model in the console log provided to you below:
-console.log(`Car 33 is a *car year goes here* *car make goes here* *car model goes here*` );
+//console.log(`Car 33 is a *car year goes here* *car make goes here* *car model goes here*`);
 
+findCarIdInfo = (id) => {
+  for(let i = 0; i < inventory.length; i++) {
+    currCar = inventory[i];
+    if (currCar.id === id) {
+      return `Car ${id} is a ${currCar.car_year} ${currCar.car_make} ${currCar.car_model}`
+    }
+  }
+}
+
+console.log(findCarIdInfo(33));
 
 
 // ==== Challenge 2 ====
