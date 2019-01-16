@@ -101,21 +101,60 @@ console.log(Antonietta.multiplyNums(3, 4));
 
 // ==== Stretch Challenge: Nested Objects and the this keyword ==== 
 
+console.log('-----stretch-----')
+
 // 1. Create a parent object with properties for name and age.  Make the name Susan and the age 70.
+const parent = {
+  name: 'Susan',
+  age: 70
+}
+
 // 2. Nest a child object in the parent object with name and age as well.  The name will be George and the age will be 50.
+
+parent.child = {
+  name: 'George',
+  age: 50
+}
+const child = parent.child;
+
 // 3. Nest a grandchild object in the child object with properties for name and age.  The name will be Sam and the age will be 30
+
+child.grandchild = {
+  name: 'Sam',
+  age: 30
+}
+const grandchild = child.grandchild;
+
+
 // 4. Give each of the objects the ability to speak their names using the this keyword.
 
-const parent = {}
+
+parent.speak = function() {
+  return `My name is ${this.name}.`
+}
+
+child.speak = function() {
+  return `My name is ${this.name}.`
+}
+
+grandchild.speak = function() {
+  return `My name is ${this.name}.`
+}
 
 // Log the parent object's name
+console.log(parent.name);
 
 // Log the child's age
+console.log(child.age);
 
 // Log the name and age of the grandchild
+console.log(grandchild.name, grandchild.age);
 
 // Have the parent speak
+console.log(parent.speak());
 
 // Have the child speak
+console.log(child.speak());
 
 // Have the grandchild speak
+console.log(grandchild.speak());
