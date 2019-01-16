@@ -12,12 +12,55 @@
 // Example format of an intern object: 1,examples@you.edu,Example,F
 const example = {
   "id": 0,
-  "name": "Example",
   "email": "examples@you.edu",
+  "name": "Example",
   "gender": "F"
 }
 
+//to avoid typing out the intern info in the exercise, i've copied the data above
+//into a text file, which I read and parse. then i loop through each student and assign
+//the key value pairs programatically
+
+//reads list of interns from data file into array for each line
+//list of interns is copied directly from the commented out info above
+const fs  = require("fs");
+let dataArr = fs.readFileSync('assignments/objects1InternData.txt').toString().split('\n');
+
+//removes comment slashes at beginning of string, and creates array of data separated by comma
+dataArr = dataArr.map(e => e.split('// ')[1].split(','));
+
+//grabs array of keys to use for our intern objects
+const keys = Object.keys(example);
+
+//accepts a string array of the contents of the intern's data
+//and returns an object with the appropriate key/value pairs being set
+let assignValues = (objStrArr) => {
+  const obj = {};
+  for (let i = 0; i < keys.length; i++) {
+    obj[keys[i]] = (i===0) ? Number.parseInt(objStrArr[i]) : objStrArr[i];
+  }
+  return obj;
+}
+
 // Write your intern objects here:
+
+//assigns each intern as object by reading dataArr entries and assigns dynamic variable
+//object using assignValues function
+
+//dynamic variable declaration using eval(). would never do this normally, since
+//creating a separate variable for each intern is an antipattern, and eval() is bad practice. // this should be done in an array normally. 
+//it also precludes use of const since it's only accessible in the block
+for (let i = 0; i < dataArr.length; i++) {
+  eval(`var ${dataArr[i][2]} = assignValues(dataArr[${i}]);`);
+}
+
+// here's how i'd do the object assignment if i was forced type out each object assignment manually:
+
+// const Mitzi = assignValues(dataArr[0]);
+// const Kennan = assignValues(dataArr[1]);
+// const Keven = assignValues(dataArr[2]);
+// const Gannie = assignValues(dataArr[3]);
+// const Antonietta = assignValues(dataArr[4]);
 
 
 // ==== Challenge 2: Reading Object Data ==== 
