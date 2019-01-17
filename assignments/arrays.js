@@ -85,16 +85,60 @@ console.log(lastCar.car_make, lastCar.car_model);
 // ==== Challenge 3 ====
 // The marketing team wants the car models listed alphabetically on the website. Sort all the car model names into alphabetical order and log the results in the console
 
+
+//using sort and a set to get unique list of sorted car models
+// not allowed for this assignment.
+
 // grabs the unique list of model names into a set
-let carModels = new Set();
+// let carModels = new Set();
+// for (let i = 0; i < inventory.length; i++) {
+//   carModels.add(inventory[i].car_model);
+// }
+
+// //converts carModels from set to array & sorts it into sortedModels
+// sortedModels = [...carModels].sort();
+
+//grabs the unique list of model names into an array
+let carModels = [];
 for (let i = 0; i < inventory.length; i++) {
-  carModels.add(inventory[i].car_model);
+  let currModel = inventory[i].car_model;
+
+  // I'm guessing .includes() is not allowed in this exercise, but if it was, this is how i'd
+  // test whether a model was already present in carModels.
+  // if (!carModels.includes(currModel)) {
+  //   carModels.push(currModel);
+  // }
+
+  // if the current model is already in carModels, we do not push it to carModels.
+  carPresent = false;
+  for (let j = 0; j < carModels.length; j++) {
+    if (carModels[j] === currModel) {
+      carPresent = true;
+    }
+  }
+  if (!carPresent) {
+    carModels.push(currModel);
+  }
 }
 
-//converts carModels from set to array & sorts it
-carModels = [...carModels].sort();
+//.slice() carModels so that modifications to remaining don't affect carModels
+let remaining = carModels.slice();
 
-console.log(carModels);
+let sortedModels = [];
+for (let i = 0; i < carModels.length; i++) {
+  alphabeticallyEarliest = 'zzzzz'
+  for (let j = 0; j < remaining.length; j++) {
+    let currModel = remaining[j];
+    if (currModel.localeCompare(alphabeticallyEarliest) === -1) {
+      alphabeticallyEarliest = currModel;
+    }
+  }
+  sortedModels.push(alphabeticallyEarliest);
+  removeIdx = remaining.indexOf(alphabeticallyEarliest);
+  remaining.splice(removeIdx, 1);
+}
+
+console.log(sortedModels);
 
 // ==== Challenge 4 ====
 // The accounting team needs all the years from every car on the lot. Create a new array from the dealer data containing only the car years and log the result in the console.
@@ -122,7 +166,12 @@ console.log(oldCars.length);
 let BMWAndAudi = [];
 for (let i = 0; i < inventory.length; i++) {
   let currCar = inventory[i];
-  if (['BMW', 'Audi'].includes(currCar.car_make)) {
+
+  //using .includes() to test if curr make is BMW or Audi
+  // if (['BMW', 'Audi'].includes(currCar.car_make)) {
+  
+  //using || to test if curr make is BMW or Audi
+  if (currCar.car_make === 'BMW' || currCar.car_make === 'Audi') {
     BMWAndAudi.push(currCar);
   }
 }
