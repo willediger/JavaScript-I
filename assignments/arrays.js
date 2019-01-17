@@ -110,7 +110,7 @@ for (let i = 0; i < inventory.length; i++) {
   // }
 
   // if the current model is already in carModels, we do not push it to carModels.
-  carPresent = false;
+  let carPresent = false;
   for (let j = 0; j < carModels.length; j++) {
     if (carModels[j] === currModel) {
       carPresent = true;
@@ -126,7 +126,7 @@ let remaining = carModels.slice();
 
 let sortedModels = [];
 for (let i = 0; i < carModels.length; i++) {
-  alphabeticallyEarliest = 'zzzzz'
+  let alphabeticallyEarliest = 'zzzzz'
   for (let j = 0; j < remaining.length; j++) {
     let currModel = remaining[j];
     if (currModel.localeCompare(alphabeticallyEarliest) === -1) {
@@ -134,7 +134,7 @@ for (let i = 0; i < carModels.length; i++) {
     }
   }
   sortedModels.push(alphabeticallyEarliest);
-  removeIdx = remaining.indexOf(alphabeticallyEarliest);
+  let removeIdx = remaining.indexOf(alphabeticallyEarliest);
   remaining.splice(removeIdx, 1);
 }
 
